@@ -4,6 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -44,5 +47,32 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class, 'seller_id');
+    }
+
+    public function purchases(): HasMany
+    {
+        return $this->hasMany(Purchase::class, 'buyer_id');
+    }
+
+    public function likedItems(): BelongsToMany
+    {
+        return $this->belongsToMany(Item::class, 'likes')
+            ->withPivot('created_at');
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }
