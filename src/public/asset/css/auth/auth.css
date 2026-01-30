@@ -1,0 +1,90 @@
+
+/* 中央寄せ */
+.auth {
+    padding: 40px 16px 80px;
+    display: flex;
+    justify-content: center;
+}
+
+/* 白いカード */
+.auth__card {
+    width: 600px;
+    background: #fff;
+    padding: 56px 24px 64px;
+    box-sizing: border-box;
+}
+
+/* タイトル */
+.auth__title {
+    margin: 0 0 32px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #111;
+    letter-spacing: 0.02em;
+}
+
+/* フォームの横幅（添付の細めの入力欄） */
+.auth__form {
+    width: 600px;
+    margin: 0 auto;
+    display: grid;
+    gap: 18px;
+}
+
+/* ラベルと入力 */
+.auth__label {
+    display: block;
+    margin: 0 0 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #111;
+}
+
+.auth__input {
+    width: 100%;
+    height: 34px;
+    padding: 6px 10px;
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: none;
+}
+
+.auth__input:focus {
+    border-color: #9a9a9a;
+}
+
+/* ボタン（赤・横長） */
+.auth__button {
+    margin-top: 10px;
+    height: 44px;
+    width: 100%;
+    border: none;
+    border-radius: 2px;
+    background: #ff5a5a;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.auth__button:hover {
+    filter: brightness(0.98);
+}
+
+/* リンク */
+.auth__links {
+    text-align: center;
+    margin-top: 6px;
+}
+
+.auth__link {
+    font-size: 12px;
+    color: #1f5eff;
+    text-decoration: none;
+}
+
+.auth__link:hover {
+    text-decoration: underline;
+}
