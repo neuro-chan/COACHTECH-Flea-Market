@@ -1,0 +1,167 @@
+
+.header {
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #ffffff;
+}
+
+.header__inner {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+}
+
+.header__logo {
+    display: block;
+    justify-self: start;
+}
+
+.header__logo-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 180px;
+}
+
+.header__search {
+    width: 100%;
+    max-width: 900px;
+    min-width: 400px;
+    justify-self: center;
+}
+
+.header__search input[type="search"] {
+    width: 100%;
+    padding: 10px 16px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.header__search input[type="search"]:focus {
+    border-color: #4a90e2;
+}
+
+.header__search input[type="search"]::placeholder {
+    color: #999999;
+}
+
+/* ナビゲーション */
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-self: end;
+}
+
+.header__link {
+    background: none;
+    border: none;
+    color: #333333;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.header__link:hover {
+    color: #4a90e2;
+}
+
+.header__button {
+    background-color: #ff4444;
+    color: #ffffff;
+    padding: 8px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+.header__button:hover {
+    background-color: #e63939;
+}
+
+
+.app__main {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* ===== タブレット対応 (768px - 850px) ===== */
+@media (max-width: 850px) {
+    .header__inner {
+        padding: 12px 16px;
+        gap: 16px;
+    }
+
+    .header__logo-image {
+        max-width: 150px;
+    }
+
+    .header__search {
+        max-width: 600px;
+        min-width: 300px;
+    }
+
+    .header__search input[type="search"] {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .header__actions {
+        gap: 12px;
+    }
+
+    .header__link {
+        font-size: 13px;
+    }
+
+    .header__button {
+        padding: 6px 16px;
+        font-size: 13px;
+    }
+
+    .app__main {
+        padding: 16px;
+    }
+}
+
+/* ===== 768px以下の調整 ===== */
+@media (max-width: 768px) {
+    .header__inner {
+        gap: 12px;
+    }
+
+    .header__logo-image {
+        max-width: 120px;
+    }
+
+    .header__search {
+        max-width: 400px;
+        min-width: 200px;
+    }
+
+    .header__actions {
+        gap: 10px;
+    }
+
+    .header__link {
+        font-size: 12px;
+    }
+
+    .header__button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}

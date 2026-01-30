@@ -1,0 +1,8 @@
+    {{-- ===== ヘッダー（共通） ===== --}}
+    <header class="header">
+        <div class="header__inner">
+            <a href="{{ url('/') }}" class="header__logo">
+                <img src="{{ asset('asset/images/COACHTECH-header-logo.png') }}" alt="COACHTECH" class="header__logo-image">
+            </a>
+        </div>
+    </header>
