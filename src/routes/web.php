@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
 
-Route::get('/', function () {
-    return view('item.index');
-});
+Route::get('/', [ItemController::class, 'index'])->name('items.index');
 
 Route::get('/auth/verify-email', function () {
     return view('auth.verify-email');

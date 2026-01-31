@@ -22,29 +22,26 @@
                 <img src="{{ asset('asset/images/COACHTECH-header-logo.png') }}" alt="COACHTECH" class="header__logo-image">
             </a>
 
+            <form class="header__search" role="search" method="GET">
+                <input id="q" name="q" type="search" placeholder="なにをお探しですか？"
+                    value="{{ request('q') }}">
+            </form>
 
-                <form class="header__search" role="search" method="GET">
-                    <input id="q" name="q" type="search" placeholder="なにをお探しですか？"
-                        value="{{ request('q') }}">
+            <nav class="header__actions" aria-label="ユーザーメニュー">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="header__link">ログアウト</button>
                 </form>
 
-                <nav class="header__actions" aria-label="ユーザーメニュー">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="header__link">ログアウト</button>
-                    </form>
-
-                    <div class="header__link">マイページ</div>
-                    <div class="header__button">出品</div>
-                </nav>
+                <div class="header__link">マイページ</div>
+                <div class="header__button">出品</div>
+            </nav>
 
         </div>
     </header>
 
     {{-- ===== メイン ===== --}}
-    <main class="app__main">
-        @yield('content')
-    </main>
+    @yield('content')
 
 </body>
 
