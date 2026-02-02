@@ -54,7 +54,7 @@ class FortifyServiceProvider extends ServiceProvider
 
         // メール認証
         Fortify::verifyEmailView(function () {
-        return view('auth.verify-emai');
+        return view('auth.verify-email');
         });
 
         // カスタムLoginRequestをバインド

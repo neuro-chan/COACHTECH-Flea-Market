@@ -5,16 +5,17 @@
 @endpush
 
 @section('content')
-    <section class="auth">
+    <div class="auth">
         <div class="auth__card">
             <h1 class="auth__title">ログイン</h1>
 
-            <form method="POST" action="{{ route('login') }}" class="auth__form">
+            <form method="POST" action="{{ route('login') }}" class="auth__form" novalidate>
                 @csrf
 
                 <div class="auth__field">
                     <label class="auth__label">メールアドレス</label>
-                    <input type="email" name="email" class="auth__input @error('email') auth__input--error @enderror" value="{{ old('email') }}">
+                    <input type="email" name="email" class="auth__input @error('email') auth__input--error @enderror"
+                        value="{{ old('email') }}">
                     @error('email')
                         <span class="auth__error-message">{{ $message }}</span>
                     @enderror
@@ -22,7 +23,8 @@
 
                 <div class="auth__field">
                     <label class="auth__label">パスワード</label>
-                    <input type="password" name="password" class="auth__input @error('password') auth__input--error @enderror">
+                    <input type="password" name="password"
+                        class="auth__input @error('password') auth__input--error @enderror">
                     @error('password')
                         <span class="auth__error-message">{{ $message }}</span>
                     @enderror
@@ -37,5 +39,5 @@
                 </div>
             </form>
         </div>
-    </section>
+    </div>
 @endsection

@@ -5,7 +5,7 @@
 @endpush
 
 @section('content')
-    <section class="auth">
+    <div class="auth">
         <div class="auth__card">
             <h1 class="auth__title">会員登録</h1>
 
@@ -57,5 +57,5 @@
                 </div>
             </form>
         </div>
-    </section>
+    </div>
 @endsection
