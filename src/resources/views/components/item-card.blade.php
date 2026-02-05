@@ -1,6 +1,6 @@
 @props(['item'])
 
-<div class="item-card">
+<a href="{{ route('items.show', $item) }}" class="item-card">
     <div class="item-image">
         @if ($item->is_sold)
             <span class="sold-label">Sold</span>
@@ -10,4 +10,4 @@
     <div class="item-name">
         {{ $item->title }}
     </div>
-</div>
+</a>

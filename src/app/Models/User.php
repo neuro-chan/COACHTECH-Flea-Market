@@ -56,6 +56,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Profile::class);
     }
 
+    public function hasProfile(): bool
+{
+    return $this->relationLoaded('profile')
+        ? $this->profile !== null
+        : $this->profile()->exists();
+}
+
     public function items(): HasMany
     {
         return $this->hasMany(Item::class, 'seller_id');
@@ -75,5 +82,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+    return $this->belongsToMany(Item::class, 'likes')
+                ->withPivot('created_at');
     }
 }

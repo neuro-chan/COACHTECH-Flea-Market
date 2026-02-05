@@ -93,7 +93,7 @@ class ItemSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'seller_id' => 1,
+                'seller_id' => 2,
                 'title' => 'タンブラー',
                 'price' => 500,
                 'brand_name' => 'なし',
@@ -104,7 +104,7 @@ class ItemSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'seller_id' => 1,
+                'seller_id' => 2,
                 'title' => 'コーヒーミル',
                 'price' => 4500,
                 'brand_name' => 'Starbacks',
@@ -115,7 +115,7 @@ class ItemSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'seller_id' => 1,
+                'seller_id' => 2,
                 'title' => 'メイクセット',
                 'price' => 2500,
                 'brand_name' => null,

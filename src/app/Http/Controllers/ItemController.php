@@ -7,26 +7,44 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
+
     public function index(Request $request)
     {
-        $tab = $request->query('tab', 'recommend');
+        $tab     = $request->input('tab', 'recommend');
+        $keyword = $request->input('keyword');
+        $user    = $request->user();
 
-        if ($tab === 'mylist' && !$request->user()) {
+
+        if ($tab === 'mylist' && !$user) {
             return view('item.index', [
-                'items' => collect(),
-                'tab'   => $tab,
+                'items'   => collect(),
+                'tab'     => $tab,
+                'keyword' => $keyword,
             ]);
         }
 
-        $items = Item::query()
-            ->with('purchase')
-            ->when($tab === 'mylist', fn ($q) =>
-                $q->whereHas('likes', fn ($likeQ) =>
-                    $likeQ->where('user_id', $request->user()->id)
-                )
-            )
+
+        $items = Item::with('purchase')
+            ->search($keyword)
+            ->when($tab === 'recommend', fn($q) => $q->recommendFor($user))
+            ->when($tab === 'mylist', fn($q) => $q->mylistFor($user))
             ->get();
 
-        return view('item.index', compact('items', 'tab'));
+        return view('item.index', compact('items', 'tab', 'keyword'));
+    }
+
+    
+    public function show(Item $item)
+    {
+        $item->load([
+            'condition',
+            'categories',
+            'comments.user',
+        ])->loadCount([
+            'comments',
+            'likes',
+        ]);
+
+        return view('item.show', compact('item'));
     }
 }

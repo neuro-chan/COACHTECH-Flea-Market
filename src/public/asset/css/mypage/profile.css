@@ -1,4 +1,3 @@
-
 /* ログイン・会員登録・メール認証画面共通 */
 .auth {
     min-height: calc(100vh - 70px);
@@ -145,7 +144,7 @@
     background-color: #c0c0c0;
 }
 
-.email-verify__resend{
+.email-verify__resend {
     background: none;
     border: none;
     text-align: center;
@@ -200,30 +199,30 @@
         font-size: 16px;
     }
 
-        .email-verify__message {
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
+    .email-verify__message {
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
 
-        }
+    }
 
-        .email-verify__button {
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-            padding: 10px 20px;
-            background-color: #d9d9d9;
-            border-radius: 5px;
-            border: 1px solid #333;
+    .email-verify__button {
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        padding: 10px 20px;
+        background-color: #d9d9d9;
+        border-radius: 5px;
+        border: 1px solid #333;
 
-        }
+    }
 
-        .email-verify__resend {
-            text-align: center;
-            color: #4a90e2;
-            font-size: 14px;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+    .email-verify__resend {
+        text-align: center;
+        color: #4a90e2;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
 
 }

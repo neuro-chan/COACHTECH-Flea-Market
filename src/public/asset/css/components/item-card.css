@@ -7,6 +7,9 @@
 }
 
 .item-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
     background: #fff;
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -56,4 +59,22 @@
     font-size: 18px;
     color: #333;
     min-height: 60px;
+}
+
+
+/* ===== タブレット対応 (768px - 850px) ===== */
+@media (max-width: 850px) and (min-width: 768px) {
+
+    .item-name {
+    padding: 10px 10px 10px 0;
+    font-size: 16px;
+    color: #333;
+    min-height: 60px;
+}
+
+    .items-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
 }
