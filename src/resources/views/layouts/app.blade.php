@@ -16,23 +16,27 @@
 <body>
     <header class="header">
         <div class="header__inner">
-            <a href="{{ url('/') }}" class="header__logo">
+            <a href="{{ route('items.index') }}" class="header__logo">
                 <img src="{{ asset('asset/images/COACHTECH-header-logo.png') }}" alt="COACHTECH"
                     class="header__logo-image">
             </a>
             @auth
-                <form class="header__search" role="search" method="GET">
-                    <input id="q" name="q" type="search" placeholder="なにをお探しですか？"
-                        value="{{ request('q') }}">
-                </form>
+                <form class="header__search" role="search" method="GET" action="{{ route('items.index') }}">
+                    {{-- 現在のタブを保持 --}}
+                    <input type="hidden" name="tab" value="{{ request('tab', 'recommend') }}">
 
+                    {{-- 検索 --}}
+                    <input id="keyword" name="keyword" type="search" placeholder="なにをお探しですか？"
+                        value="{{ request('keyword') }}">
+                </form>
+                    {{-- ナビゲーション --}}
                 <nav class="header__actions" aria-label="ユーザーメニュー">
                     <form method="POST" action="{{ route('logout') }}" class="header__logout-form">
                         @csrf
                         <button type="submit" class="header__link">ログアウト</button>
                     </form>
 
-                    <a href="" class="header__link">マイページ</a>
+                    <a href="{{ route('mypage.index') }}" class="header__link">マイページ</a>
 
                     <a href="" class="header__button">出品</a>
                 </nav>

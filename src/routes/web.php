@@ -3,10 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
-Route::view('/', 'item.index')->name('item');
 
 // ゲストユーザー専用
 Route::middleware('guest')->group(function () {
@@ -36,10 +39,10 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 
-// プロフィール登録未完了ユーザーのリダイレクト
-Route::get('/', function () {
-    //
-})->middleware(['auth', 'verified', 'profile_complete']);
+// // プロフィール登録未完了ユーザーのリダイレクト
+// Route::get('/', function () {
+//     //
+// })->middleware(['auth', 'verified', 'profile_complete']);
 
 
 // メール認証済みユーザー専用
@@ -47,15 +50,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::view('/mypage', 'mypage.index')->name('mypage.index');
     Route::view('/mypage/edit', 'mypage.edit')->name('mypage.edit');
-
-    Route::view('/settings', 'settings')->name('settings');
+    Route::post('/item/{item}/comment', [CommentController::class, 'store'])
+        ->name('item.comment.store');
+    Route::post('/item/{item}/like', [LikeController::class, 'like'])
+        ->name('item.like');
+    Route::get('/purchase/{item}', [PurchaseController::class, 'show'])
+        ->name('purchase.show');
 });
 
 
-// // Route::get('/mypage/profile', function () {
-// //     return view('mypage.edit');
-// // })->middleware(['auth', 'verified'])->name('edit.profiles');
+// 商品一覧・詳細
+Route::get('/', [ItemController::class, 'index'])->name('items.index');
+Route::get('/item/{item}', [ItemController::class, 'show'])->name('items.show');
 
 
-// Route::get('/mypage/profile', [MypageController::class, 'index'])->name('profiles.index');
+Route::get('/mypage/profile', function () {
+    return view('mypage.edit');
+})->middleware(['auth', 'verified'])->name('edit.profiles');
 
