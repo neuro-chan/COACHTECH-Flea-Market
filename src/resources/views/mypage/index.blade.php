@@ -1,61 +1,64 @@
+{{-- resources/views/mypage/index.blade.php --}}
+
 @extends('layouts.app')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('asset/css/auth/auth.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset/css/components/item-card.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset/css/mypage/mypage.css') }}">
 @endpush
 
 @section('content')
-    <div class="auth">
-        <div class="auth__card">
-            <h1 class="auth__title">会員登録</h1>
+    <div class="mypage">
+        {{-- プロフィールエリア --}}
+        <div class="mypage__profile">
+            <div class="mypage__profile-avatar">
+                @if($user->profile?->profile_image_url)
+                    <img src="{{ $user->profile->profile_image_url }}"
+                         alt="プロフィール画像"
+                         class="mypage__profile-image">
+                @else
+                    <div class="mypage__profile-placeholder"></div>
+                @endif
+            </div>
 
-            <form method="POST" action="{{ route('register') }}" class="auth__form" novalidate>
-                @csrf
+            <h2 class="mypage__username">{{ $user->name }}</h2>
 
-                <div class="auth__field">
-                    <label class="auth__label">ユーザー名</label>
-                    <input type="text" name="name" class="auth__input @error('name') auth__input--error @enderror"
-                        value="{{ old('name') }}">
-                    @error('name')
-                        <span class="auth__error-message">{{ $message }}</span>
-                    @enderror
-                </div>
+            <a href="{{ route('mypage.profile.edit') }}" class="mypage__profile-edit">
+                プロフィールを編集
+            </a>
+        </div>
 
-                <div class="auth__field">
-                    <label class="auth__label">メールアドレス</label>
-                    <input type="email" name="email" class="auth__input @error('email') auth__input--error @enderror"
-                        value="{{ old('email') }}">
-                    @error('email')
-                        <span class="auth__error-message">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="auth__field">
-                    <label class="auth__label">パスワード</label>
-                    <input type="password" name="password"
-                        class="auth__input @error('password') auth__input--error @enderror">
-                    @error('password')
-                        <span class="auth__error-message">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="auth__field">
-                    <label class="auth__label">確認用パスワード</label>
-                    <input type="password" name="password_confirmation"
-                        class="auth__input @error('password_confirmation') auth__input--error @enderror">
-                    @error('password_confirmation')
-                        <span class="auth__error-message">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <button type="submit" class="auth__button">登録する</button>
-
-                <div class="auth__links">
-                    <a href="{{ route('login') }}" class="auth__link">
-                        ログインはこちら
+        {{-- タブ --}}
+        <div class="mypage__tab">
+            <ul class="mypage__tab-list">
+                <li @class(['mypage__tab-item', 'is-active' => $tab === 'selling'])>
+                    <a href="{{ route('mypage.index', ['tab' => 'selling']) }}">
+                        出品した商品
                     </a>
-                </div>
-            </form>
+                </li>
+                <li @class(['mypage__tab-item', 'is-active' => $tab === 'purchased'])>
+                    <a href="{{ route('mypage.index', ['tab' => 'purchased']) }}">
+                        購入した商品
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        {{-- 商品一覧 --}}
+        <div class="mypage__content">
+            <div class="items-grid">
+                @forelse ($items as $item)
+                    <x-item-card :item="$item" />
+                @empty
+                    <p class="items-empty">
+                        @if($tab === 'purchased')
+                            購入した商品がありません
+                        @else
+                            出品した商品がありません
+                        @endif
+                    </p>
+                @endforelse
+            </div>
         </div>
     </div>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,11 +17,6 @@ class Item extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'seller_id',
         'title',
@@ -56,10 +52,10 @@ class Item extends Model
     }
 
     public function likes(): BelongsToMany
-    {
+{
         return $this->belongsToMany(User::class, 'likes')
-            ->withPivot('created_at');
-    }
+        ->withPivot('created_at');
+}
 
     public function purchase(): HasOne
     {
@@ -70,10 +66,14 @@ class Item extends Model
     // Scope
     // ========================================
 
-    public function scopeSearch(Builder $query, ?string $keyword): Builder
+    /**
+     * キーワード検索
+     */
+    #[Scope]
+    protected function search(Builder $query, ?string $keyword): void
     {
         if (empty($keyword)) {
-            return $query;
+            return;
         }
 
         $escapedKeyword = Str::replace(
@@ -82,27 +82,52 @@ class Item extends Model
             $keyword
         );
 
-        return $query->where('title', 'like', "%{$escapedKeyword}%");
+        $query->where('title', 'like', "%{$escapedKeyword}%");
     }
 
-    public function scopeRecommendFor(Builder $query, ?User $user): Builder
+    /**
+     * おすすめタブ用
+     */
+    #[Scope]
+    protected function recommendFor(Builder $query, ?User $user): void
     {
-        if (!$user) {
-            return $query;
+        if ($user) {
+            $query->where('seller_id', '!=', $user->id);
         }
-
-        return $query->where('seller_id', '!=', $user->id);
     }
 
-    public function scopeMylistFor(Builder $query, User $user): Builder
+    /**
+     * マイリストタブ用
+     */
+    #[Scope]
+    protected function mylistFor(Builder $query, User $user): void
     {
-        return $query->whereHas('likes', fn($q) => $q->where('user_id', $user->id))
-                     ->where('seller_id', '!=', $user->id);
+        $query->whereHas('likes', fn($q) => $q->where('user_id', $user->id))
+              ->where('seller_id', '!=', $user->id);
+    }
+
+    /**
+     * ログイン中のユーザーが購入した商品
+     */
+    #[Scope]
+    protected function purchasedBy(Builder $query, User $user): void
+    {
+        $query->whereHas('purchase', fn($q) => $q->where('buyer_id', $user->id));
+    }
+
+    /**
+     * ログイン中のユーザーが出品した商品
+     */
+    #[Scope]
+    protected function sellingBy(Builder $query, User $user): void
+    {
+        $query->where('seller_id', $user->id);
     }
 
     // ========================================
     // Accessor
     // ========================================
+
     protected function isSold(): Attribute
     {
         return Attribute::make(

@@ -30,7 +30,7 @@
                     <x-item-card :item="$item" />
                 @empty
                     <p class="items-empty">
-                        @if($keyword)
+                        @if ($keyword)
                             「{{ $keyword }}」に一致する商品が見つかりませんでした
                         @elseif($tab === 'mylist')
                             @auth

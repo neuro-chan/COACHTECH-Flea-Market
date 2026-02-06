@@ -33,7 +33,7 @@ class ItemController extends Controller
         return view('item.index', compact('items', 'tab', 'keyword'));
     }
 
-    
+
     public function show(Item $item)
     {
         $item->load([

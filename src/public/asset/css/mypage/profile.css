@@ -1,20 +1,74 @@
-/* ログイン・会員登録・メール認証画面共通 */
-.auth {
+/* 画像アップロード */
+.image-upload {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.image-upload__preview {
+    flex-shrink: 0;
+}
+
+.image-upload__img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+.image-upload__placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+}
+
+.image-upload__button {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ff6b6b;
+    background-color: #ffffff;
+    border: 2px solid #ff6b6b;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.image-upload__button:hover {
+    background-color: #ff6b6b;
+    color: #ffffff;
+}
+
+.image-upload__input {
+    display: none;
+}
+
+/* プロフィール設定画面 */
+.profile {
     min-height: calc(100vh - 70px);
     background-color: #ffffff;
     padding: 0px;
 }
 
-.auth__card {
+.prof {
+    background-color: #333333;
+}
+
+.profile__card {
     width: 100%;
-    max-width: 700px;
+    max-width: 680px;
     background-color: #ffffff;
     padding: 30px 80px 60px;
     margin: 0 auto;
 }
 
-/* ログイン・会員登録共通 */
-.auth__title {
+.profile__title {
     font-size: 28px;
     font-weight: 600;
     text-align: center;
@@ -22,15 +76,15 @@
     color: #333333;
 }
 
-.auth__form {
+.profile__form {
     width: 100%;
 }
 
-.auth__field {
+.profile__field {
     margin-bottom: 32px;
 }
 
-.auth__label {
+.profile__label {
     display: block;
     font-size: 15px;
     font-weight: 700;
@@ -38,7 +92,7 @@
     margin-bottom: 5px;
 }
 
-.auth__input {
+.profile__input {
     width: 100%;
     padding: 14px 14px;
     font-size: 16px;
@@ -48,23 +102,40 @@
     box-sizing: border-box;
 }
 
-.auth__input:focus {
+.profile__input:focus {
     outline: none;
     border-color: #ff6b6b;
 }
 
-.auth__input--error {
+.profile__input--error {
     border-color: #ff4444;
 }
 
-.auth__error-message {
+.profile__input[readonly] {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.profile__error-message {
     display: block;
     color: #ff4444;
     font-size: 13px;
     margin: 5px;
 }
 
-.auth__button {
+.profile__image-preview {
+    margin-bottom: 10px;
+}
+
+.profile__image-preview img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+.profile__button {
     width: 100%;
     padding: 14px 24px;
     font-size: 18px;
@@ -78,151 +149,67 @@
     margin-top: 16px;
 }
 
-.auth__button:hover {
+.profile__button:hover {
     background-color: #ff5252;
 }
 
-.auth__button:active {
+.profile__button:active {
     background-color: #ff3838;
-}
-
-.auth__links {
-    text-align: center;
-    margin-top: 32px;
-}
-
-.auth__link {
-    color: #4a90e2;
-    font-size: 15px;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.auth__link:hover {
-    color: #357abd;
-    text-decoration: underline;
-}
-
-
-/* メール認証画面 */
-.email-verify__actions {
-    width: 100%;
-    max-width: 700px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 50px;
-    background-color: #ffffff;
-    padding: 100px 80px 60px;
-    margin: 0 auto;
-    text-align: center;
-    display: flex;
-}
-
-.email-verify__message {
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-
-}
-
-.email-verify__button {
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px 20px;
-    background-color: #d9d9d9;
-    border-radius: 5px;
-    border: 1px solid #333;
-    text-decoration: none;
-    text-align: center;
-    display: inline-block;
-    color: #000;
-    cursor: pointer;
-}
-
-.email-verify__button:hover {
-    background-color: #c0c0c0;
-}
-
-.email-verify__resend {
-    background: none;
-    border: none;
-    text-align: center;
-    color: #4a90e2;
-    font-size: 15px;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    cursor: pointer;
-    appearance: none;
-}
-
-.email-verify__resend:hover {
-    opacity: 0.8;
-}
-
-.email-verify__notice.success {
-    color: #ff4444;
 }
 
 
 /* タブレット対応 (768px-850px) */
 @media (min-width: 768px) and (max-width: 850px) {
-    .auth {
-        padding: 60px 40px;
+
+    .image-upload {
+        gap: 16px;
     }
 
-    .auth__card {
+    .image-upload__img,
+    .image-upload__placeholder {
+        width: 80px;
+        height: 80px;
+    }
+
+    .image-upload__button {
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+
+    .profile {
+        padding: 20px 30px;
+    }
+
+    .profile__card {
         max-width: 650px;
         padding: 28px 70px 56px;
     }
 
-    .auth__title {
+    .profile__title {
         font-size: 20px;
         margin-bottom: 44px;
     }
 
-    .auth__field {
+    .profile__field {
         margin-bottom: 30px;
     }
 
-    .auth__label {
+    .profile__label {
         font-size: 14px;
     }
 
-    .auth__input {
+    .profile__input {
         padding: 15px 18px;
         font-size: 16px;
     }
 
-    .auth__button {
+    .profile__button {
         padding: 17px 28px;
         font-size: 16px;
     }
 
-    .email-verify__message {
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-
+    .profile__image-preview img {
+        width: 100px;
+        height: 100px;
     }
-
-    .email-verify__button {
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        padding: 10px 20px;
-        background-color: #d9d9d9;
-        border-radius: 5px;
-        border: 1px solid #333;
-
-    }
-
-    .email-verify__resend {
-        text-align: center;
-        color: #4a90e2;
-        font-size: 14px;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
 }

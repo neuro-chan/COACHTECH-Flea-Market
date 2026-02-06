@@ -29,7 +29,7 @@
                     <input id="keyword" name="keyword" type="search" placeholder="なにをお探しですか？"
                         value="{{ request('keyword') }}">
                 </form>
-                    {{-- ナビゲーション --}}
+                {{-- ナビゲーション --}}
                 <nav class="header__actions" aria-label="ユーザーメニュー">
                     <form method="POST" action="{{ route('logout') }}" class="header__logout-form">
                         @csrf
