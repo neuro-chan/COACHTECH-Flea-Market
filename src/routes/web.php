@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
@@ -22,8 +23,6 @@ Route::view('/auth/verify-email', 'auth.verify-email')
     ->middleware(['auth', 'not_verified'])
     ->name('verification.notice');
 
-
-// 認証メール再送信
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
 
@@ -48,23 +47,35 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 // メール認証済みユーザー専用
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::view('/mypage', 'mypage.index')->name('mypage.index');
-    Route::view('/mypage/edit', 'mypage.edit')->name('mypage.edit');
+    // マイページ
+    Route::get('/mypage', [MypageController::class, 'index'])
+        ->name('mypage.index');
+
+    // プロフィール登録・編集
+    Route::get('/mypage/profile', [ProfileController::class, 'edit'])
+        ->name('mypage.profile.edit');
+    Route::post('/mypage/profile', [ProfileController::class, 'store'])
+        ->name('mypage.profile.store');
+    Route::put('/mypage/profile', [ProfileController::class, 'update'])
+        ->name('mypage.profile.update');
+
+    // コメント・いいね
     Route::post('/item/{item}/comment', [CommentController::class, 'store'])
         ->name('item.comment.store');
     Route::post('/item/{item}/like', [LikeController::class, 'like'])
         ->name('item.like');
+
+    // 購入
     Route::get('/purchase/{item}', [PurchaseController::class, 'show'])
         ->name('purchase.show');
 });
 
 
-// 商品一覧・詳細
+// 商品一覧・詳細（認証不要）
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('items.show');
 
 
-Route::get('/mypage/profile', function () {
-    return view('mypage.edit');
-})->middleware(['auth', 'verified'])->name('edit.profiles');
-
+// Route::get('/mypage/profile', function () {
+//     return view('mypage.edit');
+// })->middleware(['auth', 'verified'])->name('edit.profiles');
