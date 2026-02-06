@@ -1,63 +1,8 @@
-/* 画像アップロード */
-.image-upload {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 60px;
-}
 
-.image-upload__preview {
-    flex-shrink: 0;
-}
-
-.image-upload__img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    background-color: #f5f5f5;
-}
-
-.image-upload__placeholder {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-color: #d9d9d9;
-}
-
-.image-upload__button {
-    display: inline-block;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: 700;
-    color: #ff6b6b;
-    background-color: #ffffff;
-    border: 2px solid #ff6b6b;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-
-.image-upload__button:hover {
-    background-color: #ff6b6b;
-    color: #ffffff;
-}
-
-.image-upload__input {
-    display: none;
-}
-
-/* プロフィール設定画面 */
 .profile {
     min-height: calc(100vh - 70px);
     background-color: #ffffff;
-    padding: 0px;
-}
-
-.prof {
-    background-color: #333333;
+    padding: 0;
 }
 
 .profile__card {
@@ -111,8 +56,8 @@
     border-color: #ff4444;
 }
 
-.profile__input[readonly] {
-    background-color: #f5f5f5;
+.profile__input {
+    background-color: #ffffff;
     cursor: not-allowed;
 }
 
@@ -121,18 +66,6 @@
     color: #ff4444;
     font-size: 13px;
     margin: 5px;
-}
-
-.profile__image-preview {
-    margin-bottom: 10px;
-}
-
-.profile__image-preview img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid #ddd;
 }
 
 .profile__button {
@@ -157,10 +90,59 @@
     background-color: #ff3838;
 }
 
+/* 画像アップロード */
+.image-upload {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.image-upload__preview {
+    flex-shrink: 0;
+}
+
+.image-upload__img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+.image-upload__placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+}
+
+.image-upload__button {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ff6b6b;
+    background-color: #ffffff;
+    border: 2px solid #ff6b6b;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.image-upload__button:hover {
+    background-color: #ff6b6b;
+    color: #ffffff;
+}
+
+.image-upload__input {
+    display: none;
+}
 
 /* タブレット対応 (768px-850px) */
 @media (min-width: 768px) and (max-width: 850px) {
-
     .image-upload {
         gap: 16px;
     }
@@ -206,10 +188,5 @@
     .profile__button {
         padding: 17px 28px;
         font-size: 16px;
-    }
-
-    .profile__image-preview img {
-        width: 100px;
-        height: 100px;
     }
 }

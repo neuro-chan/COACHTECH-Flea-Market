@@ -14,7 +14,7 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'profile_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', // 2MB
+            'profile_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
 
             'building'    => 'nullable|string|max:200',
             'postal_code' => 'required|string|regex:/^\d{3}-\d{4}$/|max:8',

@@ -27,6 +27,77 @@ class Item extends Model
         'condition_id',
     ];
 
+
+    // ========================================
+    // Scope
+    // ========================================
+
+    // SQLインジェクション対策としてLIKE演算子の特殊文字をエスケープ
+    #[Scope]
+    protected function search(Builder $query, ?string $keyword): void
+    {
+        if (empty($keyword)) {
+            return;
+        }
+
+        $escapedKeyword = Str::replace(
+            ['\\', '%', '_'],
+            ['\\\\', '\\%', '\\_'],
+            $keyword
+        );
+
+        $query->where('title', 'like', "%{$escapedKeyword}%");
+    }
+
+    // 自分の出品商品は除外（ユーザー体験向上のため）
+    #[Scope]
+    protected function recommendFor(Builder $query, ?User $user): void
+    {
+        if ($user) {
+            $query->where('seller_id', '!=', $user->id);
+        }
+    }
+
+    // いいねした商品かつ自分の出品商品は除外（購入候補のみ表示）
+    #[Scope]
+    protected function mylistFor(Builder $query, User $user): void
+    {
+        $query->whereHas('likes', fn($q) => $q->where('user_id', $user->id))
+              ->where('seller_id', '!=', $user->id);
+    }
+
+    // 購入履歴はbuyer_idで絞り、ログインユーザーに紐づく購入データだけを返す
+    #[Scope]
+    protected function purchasedBy(Builder $query, User $user): void
+    {
+        $query->whereHas('purchase', fn($q) => $q->where('buyer_id', $user->id));
+    }
+
+    // 出品一覧はseller_idで絞り、ログインユーザーの出品データだけを返す
+    #[Scope]
+    protected function sellingBy(Builder $query, User $user): void
+    {
+        $query->where('seller_id', $user->id);
+    }
+
+    // ========================================
+    // Accessor
+    // ========================================
+
+    /**
+    * アイテムの販売済み判定
+    * すでにpurchaseを読み込み済み → そのデータを使う（追加SQLなし）
+    * まだ読み込んでいない → exists()で確認（全データ取得しない）
+    */
+    protected function isSold(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->relationLoaded('purchase')
+                ? $this->purchase !== null
+                : $this->purchase()->exists()
+        );
+    }
+
     // ========================================
     // Relation
     // ========================================
@@ -61,79 +132,5 @@ class Item extends Model
     {
         return $this->hasOne(Purchase::class);
     }
-
-    // ========================================
-    // Scope
-    // ========================================
-
-    /**
-     * キーワード検索
-     */
-    #[Scope]
-    protected function search(Builder $query, ?string $keyword): void
-    {
-        if (empty($keyword)) {
-            return;
-        }
-
-        $escapedKeyword = Str::replace(
-            ['\\', '%', '_'],
-            ['\\\\', '\\%', '\\_'],
-            $keyword
-        );
-
-        $query->where('title', 'like', "%{$escapedKeyword}%");
-    }
-
-    /**
-     * おすすめタブ用
-     */
-    #[Scope]
-    protected function recommendFor(Builder $query, ?User $user): void
-    {
-        if ($user) {
-            $query->where('seller_id', '!=', $user->id);
-        }
-    }
-
-    /**
-     * マイリストタブ用
-     */
-    #[Scope]
-    protected function mylistFor(Builder $query, User $user): void
-    {
-        $query->whereHas('likes', fn($q) => $q->where('user_id', $user->id))
-              ->where('seller_id', '!=', $user->id);
-    }
-
-    /**
-     * ログイン中のユーザーが購入した商品
-     */
-    #[Scope]
-    protected function purchasedBy(Builder $query, User $user): void
-    {
-        $query->whereHas('purchase', fn($q) => $q->where('buyer_id', $user->id));
-    }
-
-    /**
-     * ログイン中のユーザーが出品した商品
-     */
-    #[Scope]
-    protected function sellingBy(Builder $query, User $user): void
-    {
-        $query->where('seller_id', $user->id);
-    }
-
-    // ========================================
-    // Accessor
-    // ========================================
-
-    protected function isSold(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => $this->relationLoaded('purchase')
-                ? $this->purchase !== null
-                : $this->purchase()->exists()
-        );
-    }
 }
+
