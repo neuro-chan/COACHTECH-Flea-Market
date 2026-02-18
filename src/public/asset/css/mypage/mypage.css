@@ -1,14 +1,12 @@
-/* asset/css/mypage/mypage-index.css */
-
 .mypage {
     width: 100%;
 }
 
 /* プロフィールエリア */
 .mypage__profile {
-    width: 1015px;
+    width: 1040px;
     margin: 0 auto;
-    padding: 40px 60px;
+    padding: 40px 0px 40px 60px;
     display: flex;
     align-items: center;
     gap: 30px;
@@ -19,22 +17,22 @@
 }
 
 .mypage__profile-image {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #ddd;
 }
 
 .mypage__profile-placeholder {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     background-color: #d9d9d9;
 }
 
 .mypage__username {
-    font-size: 28px;
+    font-size: 34px;
     font-weight: 600;
     margin: 0;
     padding-left: 40px;
@@ -44,8 +42,8 @@
 
 .mypage__profile-edit {
     flex-shrink: 0;
-    padding: 10px 24px;
-    font-size: 14px;
+    padding: 10px 40px;
+    font-size: 22px;
     font-weight: 700;
     color: #ff6b6b;
     background-color: #ffffff;
@@ -71,13 +69,14 @@
 .mypage__tab-list {
     display: flex;
     list-style: none;
-    padding: 10px 100px;
+    padding: 10px 120px;
     margin: 0;
-    gap: 40px;
+    gap: 50px;
 }
 
 .mypage__tab-item {
     font-size: 18px;
+    font-weight: 700;
     padding: 0px 20px;
     color: #666;
     cursor: pointer;
@@ -116,40 +115,46 @@
 /* ===== タブレット対応 (768px - 850px) ===== */
 @media (max-width: 850px) and (min-width: 768px) {
 
+    /* プロフィールエリア */
     .mypage__profile {
-        width: 90%;
-        padding: 40px 60px;
+        width: 700px;
+        padding: 30px 20px 30px 60px;
         gap: 20px;
     }
 
     .mypage__profile-image,
     .mypage__profile-placeholder {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
     }
 
     .mypage__username {
-        font-size: 20px;
+        font-size: 24px;
+        padding-left: 30px;
     }
 
     .mypage__profile-edit {
         padding: 8px 20px;
-        font-size: 13px;
+        font-size: 16px;
     }
 
-    .mypage__tab,
-    .mypage__content {
-        padding: 10px 60px;
+    /* タブエリア */
+    .mypage__tab {
+        padding: 18px 18px 0;
     }
 
     .mypage__tab-list {
-        padding: 10px 20px;
-        gap: 20px;
+        padding: 8px 80px;
+        gap: 35px;
     }
 
     .mypage__tab-item {
-        font-size: 16px;
-        padding: 0px 10px;
+        font-size: 14px;
+        padding: 0px 15px;
+    }
+
+    /* コンテンツエリア */
+    .mypage__content {
+        padding: 45px;
     }
 }
-

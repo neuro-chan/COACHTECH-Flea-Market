@@ -9,16 +9,16 @@
     width: 100%;
     max-width: 680px;
     background-color: #ffffff;
-    padding: 30px 80px 60px;
+    padding: 30px 0px 100px 0px;
     margin: 0 auto;
 }
 
 .profile__title {
-    font-size: 28px;
+    font-size: 34px;
     font-weight: 600;
     text-align: center;
     margin-bottom: 48px;
-    color: #333333;
+    color: #000;
 }
 
 .profile__form {
@@ -26,22 +26,14 @@
 }
 
 .profile__field {
-    margin-bottom: 32px;
-}
-
-.profile__label {
-    display: block;
-    font-size: 15px;
-    font-weight: 700;
-    color: #333333;
-    margin-bottom: 5px;
+    margin-bottom: 40px;
 }
 
 .profile__input {
     width: 100%;
     padding: 14px 14px;
     font-size: 16px;
-    border: 2px solid #cccccc;
+    border: 1px solid #000;
     border-radius: 4px;
     transition: border-color 0.3s ease;
     box-sizing: border-box;
@@ -53,7 +45,7 @@
 }
 
 .profile__input--error {
-    border-color: #ff4444;
+    border-color: #ff5555;
 }
 
 .profile__input {
@@ -61,9 +53,14 @@
     cursor: not-allowed;
 }
 
+.profile__label {
+    font-size: 20px;
+    font-weight: 700;
+}
+
 .profile__error-message {
     display: block;
-    color: #ff4444;
+    color: #ff5555;
     font-size: 13px;
     margin: 5px;
 }
@@ -74,7 +71,7 @@
     font-size: 18px;
     font-weight: 600;
     color: #ffffff;
-    background-color: #ff6b6b;
+    background-color: #ff5555;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -103,8 +100,8 @@
 }
 
 .image-upload__img {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     border-radius: 50%;
     border: 1px solid #ddd;
@@ -112,8 +109,8 @@
 }
 
 .image-upload__placeholder {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     background-color: #d9d9d9;
 }
@@ -121,7 +118,8 @@
 .image-upload__button {
     display: inline-block;
     padding: 8px 16px;
-    font-size: 14px;
+    margin-left: 30px;
+    font-size: 16px;
     font-weight: 700;
     color: #ff6b6b;
     background-color: #ffffff;

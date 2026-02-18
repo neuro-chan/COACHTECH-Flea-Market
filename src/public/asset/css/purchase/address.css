@@ -1,0 +1,119 @@
+.address {
+    min-height: calc(100vh - 70px);
+    background-color: #ffffff;
+    padding: 0;
+}
+
+.address__card {
+    width: 100%;
+    max-width: 680px;
+    background-color: #ffffff;
+    padding: 30px 0px 100px 0px;
+    margin: 0 auto;
+}
+
+.address__title {
+    font-size: 34px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 48px;
+    color: #000;
+}
+
+.address__form {
+    width: 100%;
+}
+
+.address__field {
+    margin-bottom: 60px;
+}
+
+.address__label {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.address__input {
+    width: 100%;
+    padding: 14px 14px;
+    font-size: 16px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+.address__input:focus {
+    outline: none;
+    border-color: #ff6b6b;
+}
+
+.address__input--error {
+    border-color: #ff5555;
+}
+
+.address__error-message {
+    display: block;
+    color: #ff5555;
+    font-size: 13px;
+    margin: 5px;
+}
+
+.address__button {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #ff5555;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 60px;
+}
+
+.address__button:hover {
+    background-color: #ff5252;
+}
+
+.address__button:active {
+    background-color: #ff3838;
+}
+
+
+/* ===== タブレット対応 (768px - 850px) ===== */
+@media (min-width: 768px) and (max-width: 850px) {
+    .address {
+        padding: 20px 30px;
+    }
+
+    .address__card {
+        max-width: 650px;
+        padding: 28px 70px 56px;
+    }
+
+    .address__title {
+        font-size: 20px;
+        margin-bottom: 44px;
+    }
+
+    .address__field {
+        margin-bottom: 30px;
+    }
+
+    .address__label {
+        font-size: 14px;
+    }
+
+    .address__input {
+        padding: 15px 18px;
+        font-size: 16px;
+    }
+
+    .address__button {
+        padding: 17px 28px;
+        font-size: 16px;
+    }
+}

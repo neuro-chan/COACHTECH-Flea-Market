@@ -4,7 +4,7 @@
 }
 
 .item__tab {
-    max-width: 1540px;
+    max-width: 1512px;
     margin: 0 auto;
     padding: 24px 24px 0;
     border-bottom: 2px solid #737373;
@@ -13,13 +13,14 @@
 .item__tab-list {
     display: flex;
     list-style: none;
-    padding: 10px 100px;
+    padding: 10px 160px;
     margin: 0;
     gap: 40px;
 }
 
 .item__tab-item {
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 700;
     padding: 0px 20px;
     color: #666;
     cursor: pointer;
@@ -59,16 +60,16 @@
 
     .item__tab,
     .item__content {
-        padding: 20 60px;
+        padding: 20 40px;
     }
 
     .item__tab-list {
-        padding: 10px 20px;
-        gap: 20px;
+        padding: 10px 100px;
+        gap: 30px;
     }
 
     .item__tab-item {
-        font-size: 16px;
+        font-size: 14px;
         padding: 0px 10px;
     }
 }
