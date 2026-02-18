@@ -8,15 +8,15 @@
 
 .auth__card {
     width: 100%;
-    max-width: 700px;
+    max-width: 680px;
     background-color: #ffffff;
-    padding: 30px 80px 60px;
+    padding: 30px 0px 100px 0px;
     margin: 0 auto;
 }
 
 /* ログイン・会員登録共通 */
 .auth__title {
-    font-size: 28px;
+    font-size: 34px;
     font-weight: 600;
     text-align: center;
     margin-bottom: 48px;
@@ -33,9 +33,9 @@
 
 .auth__label {
     display: block;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 700;
-    color: #333333;
+    color: #000;
     margin-bottom: 5px;
 }
 
@@ -43,7 +43,7 @@
     width: 100%;
     padding: 14px 14px;
     font-size: 16px;
-    border: 2px solid #cccccc;
+    border: 1px solid #000;
     border-radius: 4px;
     transition: border-color 0.3s ease;
     box-sizing: border-box;
@@ -68,15 +68,15 @@
 .auth__button {
     width: 100%;
     padding: 14px 24px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     color: #ffffff;
-    background-color: #ff6b6b;
+    background-color: #ff5555;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 16px;
+    margin-top: 60px;
 }
 
 .auth__button:hover {
@@ -94,7 +94,7 @@
 
 .auth__link {
     color: #4a90e2;
-    font-size: 15px;
+    font-size: 18px;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -108,29 +108,29 @@
 /* メール認証画面 */
 .email-verify__actions {
     width: 100%;
-    max-width: 700px;
+    max-width: 680px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 50px;
     background-color: #ffffff;
-    padding: 100px 80px 60px;
+    padding: 100px 0px;
     margin: 0 auto;
     text-align: center;
     display: flex;
 }
 
 .email-verify__message {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: bold;
     text-align: center;
 
 }
 
 .email-verify__button {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: bold;
-    padding: 10px 20px;
+    padding: 10px 30px;
     background-color: #d9d9d9;
     border-radius: 5px;
     border: 1px solid #333;
@@ -150,7 +150,7 @@
     border: none;
     text-align: center;
     color: #4a90e2;
-    font-size: 15px;
+    font-size: 18px;
     text-decoration: none;
     transition: color 0.3s ease;
     cursor: pointer;

@@ -1,5 +1,3 @@
-{{-- resources/views/mypage/index.blade.php --}}
-
 @extends('layouts.app')
 
 @push('styles')
@@ -12,10 +10,8 @@
         {{-- プロフィールエリア --}}
         <div class="mypage__profile">
             <div class="mypage__profile-avatar">
-                @if($user->profile?->profile_image_url)
-                    <img src="{{ $user->profile->profile_image_url }}"
-                         alt="プロフィール画像"
-                         class="mypage__profile-image">
+                @if ($user->profile?->profile_image_url)
+                    <img src="{{ $user->profile->profile_image_url }}" alt="プロフィール画像" class="mypage__profile-image">
                 @else
                     <div class="mypage__profile-placeholder"></div>
                 @endif
@@ -51,7 +47,7 @@
                     <x-item-card :item="$item" />
                 @empty
                     <p class="items-empty">
-                        @if($tab === 'purchased')
+                        @if ($tab === 'purchased')
                             購入した商品がありません
                         @else
                             出品した商品がありません

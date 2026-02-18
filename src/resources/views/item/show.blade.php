@@ -49,7 +49,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('purchase.show', ['item' => $item->id]) }}" class="item__purchase-btn">
+                <a href="{{ route('purchase.create', ['item' => $item->id]) }}" class="item__purchase-btn">
                     購入手続きへ
                 </a>
             </section>
@@ -75,14 +75,14 @@
                     </div>
                     <div class="item__detail-list-item">
                         <dt>商品の状態</dt>
-                        <dd>{{ $item->condition->condition_name }}</dd>
+                        <dd class="item__condition">{{ $item->condition->condition_name }}</>
                     </div>
                 </dl>
             </section>
 
             <!-- セクション３：コメント -->
             <section class="item__comments">
-                <h2>コメント（{{ $item->comments_count }}）</h2>
+                <h2 class="item__comments-title">コメント（{{ $item->comments_count }}）</h2>
 
                 <div class="item__comments-list">
                     @foreach ($item->comments as $comment)

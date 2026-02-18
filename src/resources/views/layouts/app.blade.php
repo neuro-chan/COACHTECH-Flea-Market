@@ -20,16 +20,15 @@
                 <img src="{{ asset('asset/images/COACHTECH-header-logo.png') }}" alt="COACHTECH"
                     class="header__logo-image">
             </a>
+            {{-- ログイン済みのナビゲーション --}}
             @auth
                 <form class="header__search" role="search" method="GET" action="{{ route('items.index') }}">
-                    {{-- 現在のタブを保持 --}}
                     <input type="hidden" name="tab" value="{{ request('tab', 'recommend') }}">
 
-                    {{-- 検索 --}}
                     <input id="keyword" name="keyword" type="search" placeholder="なにをお探しですか？"
                         value="{{ request('keyword') }}">
                 </form>
-                {{-- ナビゲーション --}}
+
                 <nav class="header__actions" aria-label="ユーザーメニュー">
                     <form method="POST" action="{{ route('logout') }}" class="header__logout-form">
                         @csrf
@@ -38,16 +37,32 @@
 
                     <a href="{{ route('mypage.index') }}" class="header__link">マイページ</a>
 
-                    <a href="" class="header__button">出品</a>
+                    <a href="{{ route('items.create') }}" class="header__button">出品</a>
                 </nav>
             @endauth
+
+            {{-- 未ログインのナビゲーション --}}
+            @guest
+                <form class="header__search" role="search" method="GET" action="{{ route('items.index') }}">
+                    <input type="hidden" name="tab" value="{{ request('tab', 'recommend') }}">
+
+                    <input id="keyword" name="keyword" type="search" placeholder="なにをお探しですか？"
+                        value="{{ request('keyword') }}">
+                </form>
+
+                <nav class="header__actions" aria-label="ユーザーメニュー">
+                    <a href="{{ route('login') }}" class="header__link">ログイン</a>
+                    <a href="{{ route('mypage.index') }}" class="header__link">マイページ</a>
+                    <a href="{{ route('items.create') }}" class="header__button">出品</a>
+                </nav>
+            @endguest
         </div>
     </header>
 
     <main class="main">
         @yield('content')
     </main>
-
+    @stack('scripts')
 </body>
 
 </html>

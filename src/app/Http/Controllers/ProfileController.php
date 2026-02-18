@@ -14,7 +14,7 @@ class ProfileController extends Controller
     {
         $user = auth()->user()->load('profile');
 
-        return view('mypage.edit', compact('user'));  // mypage.profile.edit → mypage.edit
+        return view('mypage.edit', compact('user'));
     }
 
     // プロフィール登録処理

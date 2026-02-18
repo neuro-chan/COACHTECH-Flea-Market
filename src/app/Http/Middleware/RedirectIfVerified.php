@@ -17,7 +17,7 @@ class RedirectIfVerified
     {
         if ($request->user()?->hasVerifiedEmail()) {
             // 認証済みは verify-email に入れない（必要なら / に戻す）
-            return redirect()->route('item');
+            return redirect()->route('items.index');
         }
 
         return $next($request);
