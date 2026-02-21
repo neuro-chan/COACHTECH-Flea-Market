@@ -29,7 +29,7 @@ class LoginRequestTest extends TestCase
         ]);
     }
 
-    
+
     public function test_パスワードが未入力の場合バリデーションエラーになる(): void
     {
         $this->get('/login');
