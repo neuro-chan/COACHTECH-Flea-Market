@@ -8,8 +8,8 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Middleware\RedirectIfUnverified;
 
 
 // ----------------------------------------------------
@@ -19,18 +19,19 @@ Route::middleware('guest')->group(function () {
     Route::view('/login', 'auth.login')->name('login');
     Route::view('/register', 'auth.register')->name('register');
 });
-// 商品一覧・詳細（認証不要）
-Route::get('/', [ItemController::class, 'index'])->name('items.index');
-Route::get('/item/{item}', [ItemController::class, 'show'])->name('items.show');
+// 商品一覧・詳細（ゲストOK / ただし未認証ログイン中は認証画面へ）
+Route::get('/', [ItemController::class, 'index'])
+    ->middleware(RedirectIfUnverified::class)
+    ->name('items.index');
+
+Route::get('/item/{item}', [ItemController::class, 'show'])
+    ->middleware(RedirectIfUnverified::class)
+    ->name('items.show');
 
 
 // ----------------------------------------------------
 // メール未認証ユーザー専用
 // ----------------------------------------------------
-Route::view('/auth/verify-email', 'auth.verify-email')
-    ->middleware(['auth', 'not_verified'])
-    ->name('verification.notice');
-
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
 
@@ -88,5 +89,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/sell', [ItemController::class, 'create'])
         ->name('items.create');
     Route::post('/sell', [ItemController::class, 'store'])
-        ->name('items.store');;
+        ->name('items.store');
 });
