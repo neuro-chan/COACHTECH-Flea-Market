@@ -1,14 +1,14 @@
-# coachtechフリマ
+# COACHTECHフリマ
 
 ## 環境構築
 
-1. リポジトリをクローン
+#### 1. リポジトリをクローン
 ```bash
 git clone git@github.com:neuro-chan/COACHTECH-Flea-Market.git
 cd coachtech-flea-market
 ```
 
-2. 初期セットアップ
+#### 2. 初期セットアップ
 ```bash
 make init #プロジェクトルートで実行
 ```
@@ -21,20 +21,30 @@ make init #プロジェクトルートで実行
 - DBのマイグレーション・初期データのシーディング
 - ストレージのシンボリックリンク作成
 
-## MailHogの設定
-MailHogは認証メール送受信のブラウザでの動作確認時に必要です。
-Featureテストでは `Notification::fake()` を使用しているため、テスト実行時にMailHogは不要です。
-- Mailhog管理画面: http://localhost:8025/
+#### トラブルシューティング
+`make init` 実行時に `Access denied` エラーが発生した場合は、以下のコマンドでボリュームを削除してから再実行してください。
+```bash
+>docker compose down -v
+>make init
+```
 
+&nbsp;
+## MailHogの設定
+必要な設定は `.env.example` に含まれているため、追加の設定は不要です。
+Featureテストでは `Notification::fake()` を使用しているため、テスト実行時にMailHogは不要です。
+
+&nbsp;
 ## Stripeの設定
-購入機能のFeatureテストではStripeをスキップして直接購入データを作成する方式としているため、テスト実行時にStripe APIキーは不要ですが、ブラウザでの動作確認をする場合は `.env` に以下の設定が必要です。
+ブラウザでの動作確認をする場合は `.env` に以下の設定が必要です。
 テスト用APIキーは [Stripeダッシュボード](https://dashboard.stripe.com/test/apikeys) から取得してください。
 
 ```env
 STRIPE_KEY=your_stripe_publishable_key
 STRIPE_SECRET=your_stripe_secret_key
 ```
+購入機能のFeatureテストではStripeをスキップして直接購入データを作成する方式としているため、テスト実行時にStripe APIキーは不要です。
 
+&nbsp;
 ## 使用技術
 - バックエンド：Laravel 12 / PHP 8.3
 - フロントエンド：HTML/ CSS/ JavaScript
@@ -44,6 +54,7 @@ STRIPE_SECRET=your_stripe_secret_key
 - メール（開発環境）：MailHog
 - テスト：PHPUnit（Featureテスト）
 
+&nbsp;
 ## 動作確認用URL
 
 - 動作確認URL: http://localhost/
@@ -51,14 +62,12 @@ STRIPE_SECRET=your_stripe_secret_key
 - ユーザー登録ページ: http://localhost/register
 - Mailhog管理画面: http://localhost:8025/
 
-
+&nbsp;
 ## ER図
 
-<img width="586" height="494" alt="ER" src="https://github.com/user-attachments/assets/d33441f2-f488-4fae-b01e-ae8953ae0e82" />
-
-
+&nbsp;
 ## Featureテスト（PHPUnit）
-テストにはSQLiteのインメモリDB（memory）を使用します。
+テストにはSQLiteのインメモリDBを使用します。
 設定は `phpunit.xml` に定義されておりテスト時に自動で読み込まれます。
 テストコードでは用途に応じて以下を使い分けています。
 
@@ -82,12 +91,6 @@ php artisan test tests/Feature/Http/Requests/RegisterRequestTest.php
 ```
 ---
 
-### 備考
-全ての項目が入力されている場合、会員情報が登録され、プロフィール設定画面に遷移される
-→
-全ての項目が入力されている場合、会員情報が登録され、メール認証画面に遷移される
-
-
 ### テストファイルの構成
 
 ```
@@ -110,3 +113,6 @@ tests/Feature/Http/
     ├── MypageControllerTest.php        # ID13: ユーザー情報取得
     └── ProfileControllerTest.php       # ID14: ユーザー情報変更
 ```
+
+### 備考
+テストID1:「全ての項目が入力されている場合、会員情報が登録され、プロフィール設定画面に遷移される」のテスト項目は実装と合わない処理なので、実装に合わせて「全ての項目が入力されている場合、会員情報が登録され、メール認証画面に遷移される」テストに変更しています。
